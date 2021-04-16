@@ -1,0 +1,49 @@
+S|Scene1
+M|f|If I become a Buddha|n|f|n|bgm1
+M|f|all the monsters in the world will be wiped out|n|f|n|bgm1
+M|f|If I become a monster|n|f|bk1|bgm1
+A|bf_oi|Lightning|f|bk1|bgm1
+M|f|Even the Buddha|n|f|bk2|bgm1
+A|bf_o|Lightning|t|bk2|bgm1
+M|f|cannot|n|f|bk2|bgm1
+M|f|stop me!!!|n|f|bk3|bgm1
+A|src_shake|Lightning|t|bk3|bgm1
+A|bf_i|n|f|bk3|bgm1
+M|f|1920, Shanghai.|n|f|n|bgm1
+M|f|This is a test sentence|n|f|bk4|bgm2
+A|bf_o|n|f|bk4|bgm2
+P|come|0|Mike|n|bk4|bgm2
+M|t|Hello|n|f|bk4|bgm2
+T|Mike|Hello guys!|Happy|n|f|0|f|bk4|bgm2
+P|come|2|Nancy|n|bk4|bgm2
+T|Nancy|Hi!|Happy|n|f|2|f|bk4|bgm2
+M|t|What's up|n|f|bk4|bgm2
+T|Mike|Normal|Normal|woo|f|0|f|bk4|bgm2
+T|Nancy|Bad|Sad|ohh|f|2|f|bk4|bgm2
+T|Nancy|I have to go|Sad|n|f|2|f|bk4|bgm2
+P|leave|2|Nancy|n|bk4|bgm2
+M|t|How about you Mike?|n|f|BK4|bgm2
+T|Mike|I will wait for a while|Normal|n|f|0|f|BK4|bgm2
+T|Mike|You like dogs or cats?|Normal|n|f|0|f|BK4|bgm2
+M|t|I like...|n|f|BK4|bgm2
+C|Dogs!|Cats!|None of them!|I hate animals!
+1
+M|t|Dogs are cute, aren't they?|ooo|f|BK4|bgm2
+T|Mike|True, I love them, too|Happy|n|f|0|f|BK4|bgm2
+G|expe_up|n|20
+2
+T|Mike|Cats?|Shocking|ohh|f|0|f|BK4|bgm2
+M|t|Yes!|n|f|BK4|bgm2
+T|Mike|I like cats, but dogs are better.|Happy|n|f|0|f|BK4|bgm2
+G|expe_up|n|10
+3
+M|t|I like rats!|ohh|f|BK4|bgm2
+T|Mike|OMG!!|Shocking|n|f|0|f|BK4|bgm2
+G|expe_down|n|10
+4
+M|t|I like you~|ohh|f|BK4|bgm2
+T|Mike|Get away from me!|Shocking|n|f|0|f|BK4|bgm2
+G|expe_down|n|20
+L
+E|Game|GamePlayScene1
+
