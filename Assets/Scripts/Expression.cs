@@ -12,7 +12,7 @@ public enum ExpressionType
 {
     Normal,
     Happy,
-    Sad,
+    Angry,
     Shocking,
     Confused
 }
