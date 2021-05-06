@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisplayMain : MonoBehaviour
+public class DisplayMain : Singleton<DisplayMain>
 {
     private UIManager uiManager;
     private AnimationManager animManager;
     private AudioManager audioManager;
+    private StatsManager statsManager;
 
     private Queue<IBaseTextModel> currentTextModels;
     private Dictionary<string, Queue<IBaseTextModel>> currentDict;
     private TxtFileToModel tftm;
     private bool isDiaStarted = false;
     private bool followAnim = false;
+    private bool followCharMove = false;
+
+    private bool isChoosing = false;
+    private List<Queue<IBaseTextModel>> currentChoiceBranches;
+
     private float timer = 0f;
     private static float waiting = 0f;
 
@@ -21,9 +27,11 @@ public class DisplayMain : MonoBehaviour
         uiManager = UIManager.Instance;
         animManager = AnimationManager.Instance;
         audioManager = AudioManager.Instance;
+        statsManager = StatsManager.Instance;
 
         currentTextModels = new Queue<IBaseTextModel>();
         currentDict = new Dictionary<string, Queue<IBaseTextModel>>();
+        currentChoiceBranches = new List<Queue<IBaseTextModel>>();
         tftm = new TxtFileToModel();
 
         ReadAFile("testStory.txt");
@@ -34,14 +42,27 @@ public class DisplayMain : MonoBehaviour
     {
         if (isDiaStarted)
         {
+            if(isChoosing)
+            {
+                return;
+            }
+
             if(followAnim == true)
             {
                 NextCommand();
                 followAnim = false;
             }
-            
+
+            timer += Time.deltaTime;
+
             if (timer > waiting)
             {
+                if(followCharMove)
+                {
+                    NextCommand();
+                    followCharMove = false;
+                    return;
+                }
                 uiManager.ShowNextSentenceImage();
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -50,8 +71,6 @@ public class DisplayMain : MonoBehaviour
                     uiManager.HideNextSentenceImage();
                 }
             }
-
-            timer += Time.deltaTime;
         }
     }
 
@@ -83,7 +102,7 @@ public class DisplayMain : MonoBehaviour
     {
         if(currentTextModels.Count <= 0)
         {
-            Debug.LogError("No more command/sentence in this scene!!");
+            return;
         }
         IBaseTextModel ibtm = currentTextModels.Dequeue();
         string nextType = "";
@@ -92,6 +111,7 @@ public class DisplayMain : MonoBehaviour
             nextType = currentTextModels.Peek().GetType().ToString();
         }
         string typeName = ibtm.GetType().ToString();
+        Debug.Log(typeName);
 
         switch(typeName)
         {
@@ -102,21 +122,26 @@ public class DisplayMain : MonoBehaviour
                 DisplaySelfDiaModel(ibtm);
                 break;
             case "DiaModel":
+                DisplayDiaModel(ibtm);
                 break;
             case "AnimModel":
                 DisplayAnimModel(ibtm);
                 break;
             case "CharMoveModel":
+                DisplayCharMoveModel(ibtm);
                 break;
             case "TriggerModel":
+                DisplayTriggerModel(ibtm);
                 break;
             case "ChoiceModel":
+                DisplayChoiceModel(ibtm);
                 break;
             case "EndModel":
                 break;
         }
 
         CheckNextTypeAndFollowAnim(typeName, nextType);
+        CheckNextTypeAndFollowCharMove(typeName, nextType);
     }
 
     private void DisplaySelfDiaModel(IBaseTextModel ibtm)
@@ -166,11 +191,198 @@ public class DisplayMain : MonoBehaviour
         if (animModel.bgm != "") { audioManager.PlayMusic(animModel.bgm, MusicType.BGM); }
     }
 
+    private void DisplayCharMoveModel(IBaseTextModel ibtm)
+    {
+        CharMoveModel charMoveModel = (CharMoveModel)ibtm;
+
+        if(charMoveModel.isCome) { animManager.Come(charMoveModel.pos); }
+        else                     { animManager.Leave(charMoveModel.pos); }
+
+        uiManager.SetExpression(charMoveModel.pos, statsManager.GetCharacter(charMoveModel.charName).FindExpression(ExpressionType.Normal));
+
+        if (charMoveModel.audio != "") { audioManager.PlayMusic(charMoveModel.audio, MusicType.HumanSound); }
+
+        if (charMoveModel.background != "") { uiManager.SetBackGroundImage(charMoveModel.background); }
+
+        if (charMoveModel.bgm != "") { audioManager.PlayMusic(charMoveModel.bgm, MusicType.BGM); }
+    }
+
+    private void DisplayDiaModel(IBaseTextModel ibtm)
+    {
+        DiaModel diaModel = (DiaModel)ibtm;
+
+        uiManager.UpdateSpeakerName(diaModel.name);
+
+        uiManager.StartCoroutine("UpdateDiaText", diaModel.text);
+
+        Character character = statsManager.GetCharacter(diaModel.name);
+        Sprite expression = null;
+        switch(diaModel.expression)
+        {
+            case "normal":
+                expression = character.FindExpression(ExpressionType.Normal);
+                break;
+            case "happy":
+                expression = character.FindExpression(ExpressionType.Happy);
+                break;
+            case "angry":
+                expression = character.FindExpression(ExpressionType.Angry);
+                break;
+            case "confused":
+                expression = character.FindExpression(ExpressionType.Confused);
+                break;
+            case "shocking":
+                expression = character.FindExpression(ExpressionType.Shocking);
+                break;
+        }
+
+        if(expression != null)
+        {
+            uiManager.SetExpression(diaModel.pos, expression);
+        }
+
+        if (diaModel.audio != "") { audioManager.PlayMusic(diaModel.audio, MusicType.HumanSound); }
+
+        if (diaModel.isShaking) { animManager.Shake(diaModel.pos); }
+
+        if (diaModel.isLightning) { animManager.LightningShock(); }
+
+        if (diaModel.background != "") { uiManager.SetBackGroundImage(diaModel.background); }
+
+        if(diaModel.bgm != "") { audioManager.PlayMusic(diaModel.bgm, MusicType.BGM); }
+    }
+
+    private void DisplayTriggerModel(IBaseTextModel ibtm)
+    {
+        return;
+    }
+
+    private void DisplayChoiceModel(IBaseTextModel ibtm)
+    {
+        ChoiceModel choiceModel = (ChoiceModel)ibtm;
+
+        List<string> choiceTexts = choiceModel.choicesText;
+        for(int i = 0; i < choiceTexts.Count; i++)
+        {
+            uiManager.SetChoiceText(choiceTexts[i], i + 1);
+        }
+
+        currentChoiceBranches = choiceModel.choicesBranch;
+
+        isChoosing = true;
+    }
+
     private void CheckNextTypeAndFollowAnim(string currentType, string nextType)
     {
         if(currentType != "AnimModel" && nextType == "AnimModel")
         {
             followAnim = true;
+        }
+    }
+
+    private void CheckNextTypeAndFollowCharMove(string currentType, string nextType)
+    {
+        if(currentType == "AnimModel" && nextType == "CharMoveModel")
+        {
+            followCharMove = true;
+        }
+    }
+
+    public void ChooseBranch0()
+    {
+        if(isChoosing)
+        {
+            Queue<IBaseTextModel> newTextModels = new Queue<IBaseTextModel>();
+            Queue<IBaseTextModel> addinTextModels = currentChoiceBranches[0];
+
+            Debug.Log(addinTextModels.Count);
+
+            while(addinTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(addinTextModels.Dequeue());
+            }
+
+            while(currentTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(currentTextModels.Dequeue());
+            }
+
+            currentTextModels = newTextModels;
+
+            uiManager.DisableChoicePanel();
+            isChoosing = false;
+        }
+    }
+
+    public void ChooseBranch1()
+    {
+        if(isChoosing)
+        {
+            Queue<IBaseTextModel> newTextModels = new Queue<IBaseTextModel>();
+            Queue<IBaseTextModel> addinTextModels = currentChoiceBranches[1];
+
+            while (addinTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(addinTextModels.Dequeue());
+            }
+
+            while (currentTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(currentTextModels.Dequeue());
+            }
+
+            currentTextModels = newTextModels;
+
+            uiManager.DisableChoicePanel();
+            isChoosing = false;
+        }
+    }
+
+    public void ChooseBranch2()
+    {
+        if(isChoosing)
+        {
+            Queue<IBaseTextModel> newTextModels = new Queue<IBaseTextModel>();
+            Queue<IBaseTextModel> addinTextModels = currentChoiceBranches[2];
+
+            while (addinTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(addinTextModels.Dequeue());
+            }
+
+            while (currentTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(currentTextModels.Dequeue());
+            }
+
+            currentTextModels = newTextModels;
+
+            uiManager.DisableChoicePanel();
+            isChoosing = false;
+        }
+    }
+
+    public void ChooseBranch3()
+    {
+        if(isChoosing)
+        {
+            Queue<IBaseTextModel> newTextModels = new Queue<IBaseTextModel>();
+            Queue<IBaseTextModel> addinTextModels = currentChoiceBranches[3];
+
+            while (addinTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(addinTextModels.Dequeue());
+            }
+
+            while (currentTextModels.Count > 0)
+            {
+                newTextModels.Enqueue(currentTextModels.Dequeue());
+            }
+
+            currentTextModels = newTextModels;
+
+            uiManager.DisableChoicePanel();
+            isChoosing = false;
         }
     }
 

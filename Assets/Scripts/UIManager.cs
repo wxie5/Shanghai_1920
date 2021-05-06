@@ -9,6 +9,9 @@ public class UIManager : Singleton<UIManager>
     [Header("Set in Inspector")]
     public TextMeshProUGUI charNameText;
     public TextMeshProUGUI diaText;
+    public Image char0Image;
+    public Image char1Image;
+    public Image char2Image;
     public Image backgroundImage;
     public GameObject choicePanel;
     public GameObject choice1;
@@ -62,7 +65,7 @@ public class UIManager : Singleton<UIManager>
     public IEnumerator UpdateDiaText(string text)
     {
         diaText.text = "";
-        DisplayMain.Waiting = text.Length * 0.01f + 0.1f;
+        DisplayMain.Waiting = text.Length * 0.01f + 0.2f;
         foreach (char c in text.ToCharArray())
         {
             diaText.text += c;
@@ -118,6 +121,22 @@ public class UIManager : Singleton<UIManager>
         }
 
         backgroundImage.sprite = backgroundImageDict[backgroundImageName].picture;
+    }
+
+    public void SetExpression(int pos, Sprite expression)
+    {
+        switch(pos)
+        {
+            case 0:
+                char0Image.sprite = expression;
+                break;
+            case 1:
+                char1Image.sprite = expression;
+                break;
+            case 2:
+                char2Image.sprite = expression;
+                break;
+        }
     }
 
     public void ShowNextSentenceImage()

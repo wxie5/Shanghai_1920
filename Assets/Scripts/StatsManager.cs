@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatsManager : MonoBehaviour
+public class StatsManager : Singleton<StatsManager>
 {
     public Character[] characters;
 
