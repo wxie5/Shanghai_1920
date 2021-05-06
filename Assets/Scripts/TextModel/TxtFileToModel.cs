@@ -154,6 +154,7 @@ public class TxtFileToModel
     public IBaseTextModel CharMoveModelSolver(string line)
     {
         string[] splitedStr = CutOutStrSet(line);
+
         CharMoveModel charMoveModel = new CharMoveModel(StrToBool(splitedStr[0]),
                                                             StrToInt(splitedStr[1]),
                                                             NotNullStr(splitedStr[2]),
@@ -187,21 +188,28 @@ public class TxtFileToModel
                 choices.Add(s);
             }
         }
-
+        Debug.Log(lines.Length);
         List<Queue<IBaseTextModel>> branches = new List<Queue<IBaseTextModel>>();
         Queue<IBaseTextModel> models = new Queue<IBaseTextModel>();
-        foreach (string line in lines)
+        for(int i = 1; i < lines.Length; i++)
         {
-            if (line[0] == '1' || line[0] == '2' || line[0] == '3' || line[0] == '4')
+            if(i == (lines.Length - 1))
             {
-                if(models.Count != 0)
+                models.Enqueue(GeneralSolverExceptChoice(lines[i]));
+                branches.Add(new Queue<IBaseTextModel>(models));
+                models.Clear();
+            }
+
+            if (lines[i][0] == '1' || lines[i][0] == '2' || lines[i][0] == '3' || lines[i][0] == '4')
+            {
+                if (models.Count != 0)
                 {
-                    branches.Add(models);
+                    branches.Add(new Queue<IBaseTextModel>(models));
                     models.Clear();
                 }
                 continue;
             }
-            models.Enqueue(GeneralSolverExceptChoice(line));
+            models.Enqueue(GeneralSolverExceptChoice(lines[i]));
         }
 
         ChoiceModel choiceModel = new ChoiceModel(choices, branches);
