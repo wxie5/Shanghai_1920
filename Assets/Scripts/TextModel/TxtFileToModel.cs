@@ -73,6 +73,7 @@ public class TxtFileToModel
 
         reader.Close();
 
+        Debug.Log(outDict.Count);
         return outDict;
     }
 
@@ -191,25 +192,37 @@ public class TxtFileToModel
                 choices.Add(s);
             }
         }
-        Debug.Log(lines.Length);
         List<Queue<IBaseTextModel>> branches = new List<Queue<IBaseTextModel>>();
         Queue<IBaseTextModel> models = new Queue<IBaseTextModel>();
         for(int i = 1; i < lines.Length; i++)
         {
             if(i == (lines.Length - 1))
             {
-                models.Enqueue(GeneralSolverExceptChoice(lines[i]));
-                branches.Add(new Queue<IBaseTextModel>(models));
-                models.Clear();
-            }
-
-            if (lines[i][0] == '1' || lines[i][0] == '2' || lines[i][0] == '3' || lines[i][0] == '4')
-            {
-                if (models.Count != 0)
+                if (lines[i][0] == '4')
                 {
                     branches.Add(new Queue<IBaseTextModel>(models));
                     models.Clear();
+                    branches.Add(new Queue<IBaseTextModel>(models));
                 }
+                else
+                {
+                    models.Enqueue(GeneralSolverExceptChoice(lines[i]));
+                    branches.Add(new Queue<IBaseTextModel>(models));
+                    models.Clear();
+                }
+                continue;
+            }
+
+            if(lines[i][0] == '1')
+            {
+                models.Clear();
+                continue;
+            }
+
+            if (lines[i][0] == '2' || lines[i][0] == '3' || lines[i][0] == '4')
+            {
+                branches.Add(new Queue<IBaseTextModel>(models));
+                models.Clear();
                 continue;
             }
             models.Enqueue(GeneralSolverExceptChoice(lines[i]));

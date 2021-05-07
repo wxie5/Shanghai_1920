@@ -37,7 +37,7 @@ public class UIManager : Singleton<UIManager>
 
         backgroundImageDict = new Dictionary<string, Picture>();
 
-        foreach(Picture s in backgroundImages)
+        foreach (Picture s in backgroundImages)
         {
             backgroundImageDict.Add(s.pictureName, s);
         }
@@ -65,7 +65,7 @@ public class UIManager : Singleton<UIManager>
     public IEnumerator UpdateDiaText(string text)
     {
         diaText.text = "";
-        DisplayMain.Waiting = text.Length * 0.01f + 0.2f;
+        DisplayMain.Instance.Waiting = text.Length * 0.01f + 0.2f;
         foreach (char c in text.ToCharArray())
         {
             diaText.text += c;
@@ -75,18 +75,18 @@ public class UIManager : Singleton<UIManager>
 
     public void SetChoiceText(string text, int choiceIndex)
     {
-        if(!choicePanel.activeSelf)
+        if (!choicePanel.activeSelf)
         {
             choicePanel.SetActive(true);
         }
 
-        if(choiceIndex < 1 || choiceIndex > 4)
+        if (choiceIndex < 1 || choiceIndex > 4)
         {
             Debug.LogError("Choice index can only be the integer from 1 to 4");
             return;
         }
 
-        switch(choiceIndex)
+        switch (choiceIndex)
         {
             case 1:
                 choice1Text.text = text;
@@ -115,7 +115,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SetBackGroundImage(string backgroundImageName)
     {
-        if(!backgroundImageDict.ContainsKey(backgroundImageName))
+        if (!backgroundImageDict.ContainsKey(backgroundImageName))
         {
             return;
         }
@@ -125,7 +125,7 @@ public class UIManager : Singleton<UIManager>
 
     public void SetExpression(int pos, Sprite expression)
     {
-        switch(pos)
+        switch (pos)
         {
             case 0:
                 char0Image.sprite = expression;
@@ -149,4 +149,37 @@ public class UIManager : Singleton<UIManager>
     {
         if (nextSentenceImage.activeSelf) { nextSentenceImage.SetActive(false); }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="buttonNumber">1, 2, 3 or 4</param>
+    public void DisableButton(int buttonNumber)
+    {
+        switch(buttonNumber)
+        {
+            case 1:
+                choice1Button.interactable = false;
+                break;
+            case 2:
+                choice2Button.interactable = false;
+                break;
+            case 3:
+                choice3Button.interactable = false;
+                break;
+            case 4:
+                choice4Button.interactable = false;
+                break;
+        }
+    }
+
+    public void EnableAllButton()
+    {
+        choice1Button.interactable = true;
+        choice2Button.interactable = true;
+        choice3Button.interactable = true;
+        choice4Button.interactable = true;
+    }
+
+
 }
