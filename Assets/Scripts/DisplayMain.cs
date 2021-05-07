@@ -34,7 +34,7 @@ public class DisplayMain : Singleton<DisplayMain>
         currentChoiceBranches = new List<Queue<IBaseTextModel>>();
         tftm = new TxtFileToModel();
 
-        ReadAFile("testStory.txt");
+        ReadAFile("Ch1.txt");
         StartDia("Scene1");
     }
 

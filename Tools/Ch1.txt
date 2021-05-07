@@ -1,0 +1,171 @@
+第一章
+CG结束，黑屏，BGM切换
+Narrator: Shanghai, 1920
+渐入画面，办公室过道，男主刘星哲站在办公室门外。
+Ming: Senior Xu, can you please print out this document for me, and then bring me a cup of coffee?
+Qiang: Same.
+Xu Yang (laughing bitterly): Alright.
+刘星哲进入办公室
+Liu Xingzhe: Are you disabled?
+Liu Xingzhe: Xu Yang, don't care about them!
+Narrator: Xu Yang and Liu Xingzhe were at the same level, but his legs were accidentally injured by a gangster during an arrest and was unable to go out. Since he didn't want to give up his job as a police officer, he could only work as a clerical job in the police station.
+Liu Xingzhe’s thoughts: Xu Yang was supposed to be promoted with me, but because of a leg injury, he could only do a clerical job, and was looked down upon by the newcomers…
+Liu Xingzhe: Xu Yang, you are really wronged. These newcomers are so ignorant. I’m gonna give them a lesson.
+Xu Yang: Ugh, it's okay. It would be nice to be able to stay in the police station. Since I can’t go out, it’s okay to do these things for me.
+Operator: Well, yes, I see…
+接线员A走向刘星哲
+Operator: Sir, a body was found in the alley south of the city. The sheriff asked us to investigate immediately.
+Liu Xingzhe: Homicide?
+Operator: It doesn't seem to be that simple. On the other side of the phone, the corpse was said to be very strange.
+Liu Xingzhe: What do you mean?
+Operator: We may not know until arriving at the scene.
+Liu Xingzhe: Sure. I will go there right now. You two, go with me.
+Ming, Qiang: Yes, sir.
+转场。
+
+城南小巷，干尸图片。
+Ming: Oh my god, this...
+Liu Xingzhe frowned: Isn't this Zhang San's stupid son? I saw him alive two days ago, and he became like this now. Unbelievable.
+Qiang: Yes, we saw him on the patrol two days ago.
+Liu Xingzhe: The body has shriveled, and the blood in the body seems to have been drained.
+点击放大脖子照片，两个孔。
+Liu Xingzhe's thoughts: There are still two holes in the neck. Was it the death caused by drawing blood from here with some kind of tool?
+Liu Xingzhe: Take the body back to the police station first. You two, lift it up.
+Ming, Qiang: Ah, this...
+Liu Xingzhe: What’s your problem? Just do it!
+
+转场警局。刘星哲和徐阳站在尸体前。
+Liu Xingzhe: Yang, what do you think?
+Xu Yang: I have never seen such a weird corpse.
+Liu Xingzhe: Me neither.
+Xu Yang: He has no other scars except the two small holes in his neck. It can only be explained that someone used some kind of tool to drain his blood from these two holes.
+Liu Xingzhe: Can this really be done? There was no drop of blood left at the scene, what tools can make a person's blood so cleanly drained.
+Xu Yang: There were no blood stains at the scene... Maybe the corpse was processed and moved to the alley?
+Liu Xingzhe: The alleys in the south of the city seem remote. Many hawkers like to come here to relieve their hands before they set up their stalls. They have warned them many times and they still don’t change. It seems that you have to send someone to watch them next time.
+Xu Yang: So the murderer is either unfamiliar with this place, or he wants the body to be found, or he doesn't care at all.
+Liu Xingzhe: Besides, why does the murderer want the blood? Could it be that he is carrying out some kind of feudal superstition cult activities?
+Xu Yang: This is a place that can be investigated in depth. I will go through the information to see if there have been any similar cases.
+Liu Xingzhe: Good.
+Ming: Zhang San is here!
+张三颤巍巍地走进停尸房，见到尸体后噗通一声跪倒在地。
+
+Zhang San: My son! Oh my god!
+Narrator: Zhang San, who claims to be a descendant of a nobleman in the Qing Dynasty, moved to a dilapidated house in the south of the city because of the decline of his family. No one knew where he came from, and no one had seen his wife. It has been several years since he moved to the south of the city, and he still has long braids on his head. Since the founding of the Republic of China, the whole people forced the pigtails to be cut, but he refused to follow it, saying that this was the last dignity of his Qing nobility. The resistance was so fierce that he hit the scissors with his head. The sheriff couldn't help him. Seeing that he had taken a stupid son alone, he quietly helped him conceal the fact of keeping pigtails.
+Liu Xingzhe: When was the last time you saw your son?
+Zhang San: Yesterday we were having dinner together. After dinner, he bounced and went out. He always did this. I thought she was just playing in the yard. Who knows, why did he run so far? Oh, no!
+Liu Xingzhe:...
+Zhang San: How come is the inheritance of our Zhang family broken here! !
+Liu Xingzhe turned to Xu Yang: Let’s go out first...
+
+渐出画面，系统：两天后。
+渐入画面 警局办公室，
+
+Operator:...Um...Okay...
+The operator walked to Liu Xingzhe: Sir, Zhang San's body was found in the alley...
+Liu Xingzhe: What the...?! How?
+Operator: You should go to the site to have a look...
+转场，城南小巷，干尸图片
+Liu Xingzhe: What a corpse again...
+放大脖子，两个孔
+Liu Xingzhe: Sure enough, there are exactly two holes. What is going on…
+Liu Xingzhe: Besides, there seems to be a lot of bruises...
+Liu Xingzhe: Anyway, take the body back first.
+刘星哲转向警员A，B
+Ming, Qiang: un...understood.
+
+
+转场警局
+Liu Xingzhe: Yang, what do you think?
+Xu Yang: Although there are a lot of bruises on the body, the cause of death is still these two strange holes in the neck.
+Liu Xingzhe: Someone reported that they saw two hawkers punching and kicking Zhang San in the alley yesterday evening. I have sent someone to look for them. Maybe we can find out some important information then.
+Xu Yang: Hope so.
+Liu Xingzhe: How's your information lookup?
+Xu Yang:...
+Liu Xingzhe: What's wrong?
+Xu Yang: Oh, it's okay. I haven't found a similar case yet. I will continue to look for it.
+Liu Xingzhe: Okay, thank you very much.
+Ming: Boss, the two hawkers have been brought here!
+
+警员AB一前一后带着小贩走到刘星哲前。
+
+Options:
+A: Intimidation
+B: Ask
+
+Option A:
+Liu Xingzhe: Come on, why did you kill Zhang San?
+Hawker A, B: No, that’s not true! We really didn't kill him!
+Liu Xingzhe: Someone saw you guys punching and kicking Zhang San. You still don't want to confess?
+Hawker A: He did it first!
+Liu Xingzhe: So you killed him?
+Hawker B: We didn't kill him!
+Liu Xingzhe: How can we trust you? Why are you guys in the alley at that time?
+Hawker A: Emm...we
+Hawker B: We just made a small business, and then Zhang San rushed over and said that we killed his son, caught and bitten again! Since he did it first, then we must fight back. This guy is quite stubborn. He doesn't let go of the fight. He insists that we killed his son and want us to pay for our lives. After beating for a while, he let go, and we hurried away because we were afraid that something would happen if we continued the fight. When we left, he was still scolding us, we really didn't kill him.
+Liu Xingzhe: Small business?
+Hawker A: Uh, this stupid.
+Liu Xingzhe: take them to ask more questions.
+Ming, Qiang: Yes!
+
+警员A,B带着小贩离开
+//徐阳欣赏值+10
+
+Option B:
+Liu Xingzhe: Someone saw you beating Zhang San in the alley yesterday evening. Why did you do this?
+Vendor A: I was ready to close the stall yesterday evening when I sold out. Hearing what seemed to be a movement in the alley, I curiously leaned over and took a look. Zhang San was hiding there. When he saw me, he rushed over to scratch and bite me. Look at my arm, there are also his scratches!
+Vendor B: That's right, that's right. I heard someone fighting, so I went over and watched it. I didn't expect Zhang San to fight with me, so I must fight back.
+Vendor A: The guy was holding on to me, and then he let go. We were afraid that we would kill another person, so we hurried away.
+Liu Xingzhe: Okay, I see, you are free to leave.
+警察A和B带着小贩离开了。
+
+选项收束：
+Xu Yang: It seems that the bruise on the body has nothing to do with the cause of death.
+Liu Xingzhe: It seems that Zhang San wanted to find the murderer himself, but he was killed by the murderer instead.
+
+放出干尸图片
+
+Liu Xingzhe: Look at the horrified look on his face, as if he saw some monster.
+Xu Yang:...
+Liu Xingyue: Xingzhe!
+Liu Xingzhe: Ah... why did she come here.
+
+转场，警察办公室，警员A,B夹着刘星悦。
+
+Ming: Miss, I haven't seen you in a few days, and I look pretty again.
+Liu Xingyue: Hahaha, you are so sweet！
+Qiang: Miss, this cake is so delicious. If anyone marries you, that would be a blessing for three lives.
+Liu Xingyue: Thanks. Eat more if you like it.
+Liu Xingzhe: What are you guys doing!
+警员A,B立马回头对着刘星哲。
+刘星悦上前
+Liu Xingyue: I missed my brother so I just made some cakes for you. Have a try!
+Liu Xingzhe: Didn't I tell you not to go out these few days? It's dangerous outside recently. Isn't it good to hide at home?
+Liu Xingyue: I’m staying at home forever! Do you want to smother me? It's okay, I can protect myself. It's you who are outside every day and is much more dangerous than me.
+Liu Xingzhe: I am a policeman.
+Liu Xingyue: Then if I am in danger, you will definitely come over to protect me right away. Right?
+Ming, Qiang: Of course.
+Liu Xingyue: Alright. I will leave the cake here and go back. Remember to eat it.
+Liu Xingzhe: You two send her back.
+Ming, Qiang: Yes,sir!
+
+转场，停尸房。
+
+Liu Xingzhe: Sigh, she finally left. Don’t forget to eat the cake. I leave your share there.
+Xu Yang: Thanks. Isn't it nice for your sister to come to see you?
+Liu Xingzhe: It's pretty good, but it's been so messy these days. I'm afraid that something will happen to her.
+Xu Yang: Then we have to catch the murderer, so as to protect your sister. Right?
+Liu Xingzhe: For sure.
+Xu Yang: It’s time for us to sort through these two cases. Are you ready?
+Liu Xingzhe: Yes.
+
+Xu Yang: These two cases occurred in
+
+
+Options:
+A. South alley
+B. West Alley
+
+Option A:
+Liu Xingzhe: Of course it's the south alley. Wouldn't I, as a policeman, even know this?
+Xu Yang: Haha, good job. I just want to check if you are distracted by your sister.
+//徐阳欣赏值+5

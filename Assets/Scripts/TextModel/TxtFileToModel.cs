@@ -29,7 +29,7 @@ public class TxtFileToModel
                 line = reader.ReadLine();
                 if(line == "")
                 {
-                    break;
+                    continue;
                 }
 
                 if(line[0] == 'S')
@@ -45,7 +45,7 @@ public class TxtFileToModel
                     outDict.Add(key, new Queue<IBaseTextModel>(textModel));
                     textModel.Clear();
                     key = "";
-                    continue;
+                    break;
                 }
                 if(line[0] == 'C')
                 {
@@ -64,7 +64,10 @@ public class TxtFileToModel
                     choiceLines.Add(line);
                     continue;
                 }
-                textModel.Enqueue(GeneralSolverExceptChoice(line));
+
+                var nextModel = GeneralSolverExceptChoice(line);
+                if(nextModel != null)
+                    textModel.Enqueue(nextModel);
             }
         }
 
