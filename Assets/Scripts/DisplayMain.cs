@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DisplayMain : Singleton<DisplayMain>
 {
@@ -20,7 +21,7 @@ public class DisplayMain : Singleton<DisplayMain>
     private List<Queue<IBaseTextModel>> currentChoiceBranches;
 
     private float timer = 0f;
-    private static float waiting = 0f;
+    private float waiting = 0f;
 
     private void Start()
     {
@@ -66,7 +67,6 @@ public class DisplayMain : Singleton<DisplayMain>
                 uiManager.ShowNextSentenceImage();
                 if (Input.GetMouseButtonDown(0))
                 {
-                    timer = 0;
                     NextCommand();
                     uiManager.HideNextSentenceImage();
                 }
@@ -74,9 +74,13 @@ public class DisplayMain : Singleton<DisplayMain>
         }
     }
 
-    public static float Waiting
+    public float Waiting
     {
-        set { waiting = value; }
+        set
+        { 
+            waiting = value;
+            timer = 0;
+        }
     }
 
     //Please ensure that the file is in the correct format, there is no exception check for now
@@ -132,11 +136,13 @@ public class DisplayMain : Singleton<DisplayMain>
                 break;
             case "TriggerModel":
                 DisplayTriggerModel(ibtm);
+                NextCommand();
                 break;
             case "ChoiceModel":
                 DisplayChoiceModel(ibtm);
                 break;
             case "EndModel":
+                DisplayEndModel(ibtm);
                 break;
         }
 
@@ -157,16 +163,16 @@ public class DisplayMain : Singleton<DisplayMain>
 
         if (selfDiaModel.isLightning) { animManager.LightningShock(); }
 
-        if (selfDiaModel.background != "") { uiManager.SetBackGroundImage(selfDiaModel.background); }
+        if (selfDiaModel.background != "" && selfDiaModel.background != "*") { uiManager.SetBackGroundImage(selfDiaModel.background); }
 
-        if (selfDiaModel.bgm != "") { audioManager.PlayMusic(selfDiaModel.bgm, MusicType.BGM); }
+        if (selfDiaModel.bgm != "" && selfDiaModel.bgm != "*") { audioManager.PlayMusic(selfDiaModel.bgm, MusicType.BGM); }
     }
 
     private void DisplayAnimModel(IBaseTextModel ibtm)
     {
         AnimModel animModel = (AnimModel)ibtm;
 
-        switch(animModel.animName)
+        switch (animModel.animName)
         {
             case "bf_oi":
                 animManager.StartCoroutine("BlindfoldFadeOutFadeIn", 2f);
@@ -186,9 +192,9 @@ public class DisplayMain : Singleton<DisplayMain>
 
         if (animModel.isLightning) { animManager.LightningShock(); }
 
-        if (animModel.background != "") { uiManager.SetBackGroundImage(animModel.background); }
+        if (animModel.background != "" && animModel.background != "*") { uiManager.SetBackGroundImage(animModel.background); }
 
-        if (animModel.bgm != "") { audioManager.PlayMusic(animModel.bgm, MusicType.BGM); }
+        if (animModel.bgm != "" && animModel.background != "*") { audioManager.PlayMusic(animModel.bgm, MusicType.BGM); }
     }
 
     private void DisplayCharMoveModel(IBaseTextModel ibtm)
@@ -202,9 +208,9 @@ public class DisplayMain : Singleton<DisplayMain>
 
         if (charMoveModel.audio != "") { audioManager.PlayMusic(charMoveModel.audio, MusicType.HumanSound); }
 
-        if (charMoveModel.background != "") { uiManager.SetBackGroundImage(charMoveModel.background); }
+        if (charMoveModel.background != "" && charMoveModel.background != "*") { uiManager.SetBackGroundImage(charMoveModel.background); }
 
-        if (charMoveModel.bgm != "") { audioManager.PlayMusic(charMoveModel.bgm, MusicType.BGM); }
+        if (charMoveModel.bgm != "" && charMoveModel.bgm != "*") { audioManager.PlayMusic(charMoveModel.bgm, MusicType.BGM); }
     }
 
     private void DisplayDiaModel(IBaseTextModel ibtm)
@@ -247,14 +253,24 @@ public class DisplayMain : Singleton<DisplayMain>
 
         if (diaModel.isLightning) { animManager.LightningShock(); }
 
-        if (diaModel.background != "") { uiManager.SetBackGroundImage(diaModel.background); }
+        if (diaModel.background != "" && diaModel.background != "*") { uiManager.SetBackGroundImage(diaModel.background); }
 
-        if(diaModel.bgm != "") { audioManager.PlayMusic(diaModel.bgm, MusicType.BGM); }
+        if(diaModel.bgm != "" && diaModel.bgm != "*") { audioManager.PlayMusic(diaModel.bgm, MusicType.BGM); }
     }
 
     private void DisplayTriggerModel(IBaseTextModel ibtm)
     {
-        return;
+        TriggerModel triggerModel = (TriggerModel)ibtm;
+
+        switch(triggerModel.command)
+        {
+            case "expe_up":
+                //call a function that increase expectation
+                break;
+            case "expe_down":
+                //call a function that decrease expectation
+                break;
+        }
     }
 
     private void DisplayChoiceModel(IBaseTextModel ibtm)
@@ -265,11 +281,35 @@ public class DisplayMain : Singleton<DisplayMain>
         for(int i = 0; i < choiceTexts.Count; i++)
         {
             uiManager.SetChoiceText(choiceTexts[i], i + 1);
+            if(choiceTexts[i] == "...")
+            {
+                uiManager.DisableButton(i + 1);
+            }
         }
 
         currentChoiceBranches = choiceModel.choicesBranch;
 
         isChoosing = true;
+    }
+
+    private void DisplayEndModel(IBaseTextModel ibtm)
+    {
+        EndModel endModel = (EndModel)ibtm;
+
+        if(endModel.command == "Game")
+        {
+            SceneManager.LoadScene(endModel.targetName);
+        }
+        else if(endModel.command == "Dia")
+        {
+            StartDia(endModel.targetName);
+        }
+        else if(endModel.command == "End")
+        {
+            currentDict = null;
+            currentChoiceBranches = null;
+            currentTextModels = null;
+        }
     }
 
     private void CheckNextTypeAndFollowAnim(string currentType, string nextType)
@@ -309,6 +349,7 @@ public class DisplayMain : Singleton<DisplayMain>
 
             currentTextModels = newTextModels;
 
+            uiManager.EnableAllButton();
             uiManager.DisableChoicePanel();
             isChoosing = false;
         }
@@ -333,6 +374,7 @@ public class DisplayMain : Singleton<DisplayMain>
 
             currentTextModels = newTextModels;
 
+            uiManager.EnableAllButton();
             uiManager.DisableChoicePanel();
             isChoosing = false;
         }
@@ -357,6 +399,7 @@ public class DisplayMain : Singleton<DisplayMain>
 
             currentTextModels = newTextModels;
 
+            uiManager.EnableAllButton();
             uiManager.DisableChoicePanel();
             isChoosing = false;
         }
@@ -381,6 +424,7 @@ public class DisplayMain : Singleton<DisplayMain>
 
             currentTextModels = newTextModels;
 
+            uiManager.EnableAllButton();
             uiManager.DisableChoicePanel();
             isChoosing = false;
         }

@@ -17,7 +17,7 @@ public class AnimationManager : Singleton<AnimationManager>
 
     public IEnumerator BlindfoldFadeOutFadeIn(float waitingTime)
     {
-        DisplayMain.Waiting = 2.2f + waitingTime;
+        DisplayMain.Instance.Waiting = 2.2f + waitingTime;
         blindfoldAnim.SetBool("FadeOut", true);
         yield return new WaitForSeconds(waitingTime);
         blindfoldAnim.SetBool("FadeOut", false);
@@ -26,19 +26,19 @@ public class AnimationManager : Singleton<AnimationManager>
     public void BlindfoldFadeIn()
     {
         blindfoldAnim.SetBool("FadeOut", false);
-        DisplayMain.Waiting = 1.1f;
+        DisplayMain.Instance.Waiting = 1.1f;
     }
 
     public void BlindfoldFadeOut()
     {
         blindfoldAnim.SetBool("FadeOut", true);
-        DisplayMain.Waiting = 1.1f;
+        DisplayMain.Instance.Waiting = 1.1f;
     }
 
     public void BackgroundShake()
     {
         backgroundAnim.SetTrigger("Shake");
-        DisplayMain.Waiting = 1.0f;
+        DisplayMain.Instance.Waiting = 1.0f;
     }
 
     public void Come(int pos)
@@ -55,7 +55,7 @@ public class AnimationManager : Singleton<AnimationManager>
                 char2Anim.SetBool("IsCome", true);
                 break;
         }
-        DisplayMain.Waiting = 1.1f;
+        DisplayMain.Instance.Waiting = 1.1f;
     }
 
     public void Shake(int pos)
@@ -72,7 +72,7 @@ public class AnimationManager : Singleton<AnimationManager>
                 char2Anim.SetTrigger("Shake");
                 break;
         }
-        DisplayMain.Waiting = 1.1f;
+        DisplayMain.Instance.Waiting = 1.1f;
     }
 
     public void Leave(int pos)
@@ -89,7 +89,7 @@ public class AnimationManager : Singleton<AnimationManager>
                 char2Anim.SetBool("IsCome", false);
                 break;
         }
-        DisplayMain.Waiting = 1.1f;
+        DisplayMain.Instance.Waiting = 1.1f;
     }
 
     /*
