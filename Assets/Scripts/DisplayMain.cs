@@ -240,6 +240,12 @@ public class DisplayMain : Singleton<DisplayMain>
             case "shocking":
                 expression = character.FindExpression(ExpressionType.Shocking);
                 break;
+            case "ridicule":
+                expression = character.FindExpression(ExpressionType.Ridicule);
+                break;
+            case "silence":
+                expression = character.FindExpression(ExpressionType.Silence);
+                break;
         }
 
         if(expression != null)

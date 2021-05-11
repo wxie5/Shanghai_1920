@@ -14,6 +14,8 @@ public enum ExpressionType
     Happy,
     Angry,
     Shocking,
-    Confused
+    Confused,
+    Ridicule,
+    Silence
 }
 
