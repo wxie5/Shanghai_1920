@@ -27,10 +27,14 @@ public class PlayerController : MonoBehaviour {
     private Direction facingDirection;
     private PlayerStatus status;
     private Vector2 rollingTarget;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     private void Start() {
         body = GetComponent<Rigidbody2D>();
         collider = GetComponent<CapsuleCollider2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         facingDirection = Direction.Right;
         status = PlayerStatus.Idle;
     }
@@ -50,9 +54,12 @@ public class PlayerController : MonoBehaviour {
         }
         
         var xDir = Input.GetAxis("Horizontal") * speed;
-        if (xDir != 0) {
+        animator.SetBool("Running", !Mathf.Approximately(xDir, 0f));
+        if (xDir != 0f) {
             facingDirection = xDir < 0f ? Direction.Left : Direction.Right;
         }
+
+        spriteRenderer.flipX = facingDirection == Direction.Left;
         var dir = new Vector2(xDir, body.velocity.y);
         body.velocity = dir;
         
@@ -76,6 +83,7 @@ public class PlayerController : MonoBehaviour {
 
         var attack = Input.GetButtonDown("Fire1");
         if (attack) {
+            animator.SetTrigger("Attack");
             var direction = facingDirection == Direction.Left ? Vector2.left : Vector2.right;
             var enemy = GetEnemy(direction);
             print(enemy);
