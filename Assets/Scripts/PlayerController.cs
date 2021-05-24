@@ -30,6 +30,13 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    public bool TakeDamage() {
+        if (status == PlayerStatus.Rolling) return false;
+        
+        animator.SetTrigger("TakeDamage");
+        return true;
+    }
+
     private void Start() {
         body = GetComponent<Rigidbody2D>();
         collider = GetComponent<CapsuleCollider2D>();
@@ -44,7 +51,7 @@ public class PlayerController : MonoBehaviour {
             var currentPosition = (Vector2) transform.position;
             var direction = (rollingTarget - currentPosition).normalized;
             var target = currentPosition + direction * (rollingSpeed * Time.fixedDeltaTime);
-            if (direction != (rollingTarget - target).normalized) {
+            if (direction != (rollingTarget - target).normalized || currentPosition == target) {
                 body.MovePosition(rollingTarget);
                 status = PlayerStatus.Idle;
             } else {
@@ -73,12 +80,13 @@ public class PlayerController : MonoBehaviour {
 
         var roll = Input.GetButtonDown("Roll");
         if (roll && status != PlayerStatus.Rolling) {
-            status = PlayerStatus.Rolling;
             var movingDirection = body.velocity.normalized;
-            var rollDistance = GetRollDistance(movingDirection);
-            rollingTarget = transform.position + (Vector3) movingDirection * rollDistance;
-            // body.MovePosition(transform.position + (Vector3) movingDirection * rollDistance);
-            // transform.position += (Vector3) movingDirection * rollDistance;
+            if (movingDirection != Vector2.zero) {
+                status = PlayerStatus.Rolling;
+                var rollDistance = GetRollDistance(movingDirection);
+                rollingTarget = transform.position + (Vector3) movingDirection * rollDistance;
+                animator.SetTrigger("Dodge");
+            }
         }
 
         var attack = Input.GetButtonDown("Fire1");
@@ -88,6 +96,11 @@ public class PlayerController : MonoBehaviour {
             var enemy = GetEnemy(direction);
             print(enemy);
         }
+
+        // var testDamage = Input.GetKeyDown(KeyCode.F);
+        // if (testDamage) {
+        //     animator.SetTrigger("TakeDamage");
+        // }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -100,7 +113,7 @@ public class PlayerController : MonoBehaviour {
     private float GetRollDistance(Vector2 direction) {
         var result = 
             Physics2D.BoxCast(
-                transform.position, 
+                (Vector2) transform.position + 0.52f * Vector2.right, 
                 collider.size - 0.2f * Vector2.one, 
                 0f,
                 direction,

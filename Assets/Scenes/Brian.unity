@@ -173,7 +173,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3.83
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1099,12 +1099,12 @@ PrefabInstance:
     - target: {fileID: 3579577822555910384, guid: 46c546ff5b4f975409ae613d3a836d1c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.731
+      value: -4.75
       objectReference: {fileID: 0}
     - target: {fileID: 3579577822555910384, guid: 46c546ff5b4f975409ae613d3a836d1c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.545
+      value: -2.478
       objectReference: {fileID: 0}
     - target: {fileID: 3579577822555910384, guid: 46c546ff5b4f975409ae613d3a836d1c,
         type: 3}
@@ -1197,10 +1197,45 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910389, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910389, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910389, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910389, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3579577822555910391, guid: 46c546ff5b4f975409ae613d3a836d1c,
         type: 3}
       propertyPath: m_Offset.y
-      value: 0.05
+      value: 0.028466761
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910391, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.0981404
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910391, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.4122033
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579577822555910391, guid: 46c546ff5b4f975409ae613d3a836d1c,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.015301943
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46c546ff5b4f975409ae613d3a836d1c, type: 3}
