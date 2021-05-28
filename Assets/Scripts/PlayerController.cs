@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Direction {
     Left, Right
@@ -107,6 +108,9 @@ public class PlayerController : MonoBehaviour {
         if (other.CompareTag("Pickup")) {
             print("Item pickup");
             Destroy(other.gameObject);
+        } else if (other.CompareTag("Portal")) {
+            var portal = other.GetComponent<Portal>();
+            SceneManager.LoadScene(portal.sceneName);
         }
     }
 

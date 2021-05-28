@@ -6,6 +6,7 @@ TagManager:
   tags:
   - blindfold
   - Pickup
+  - Portal
   layers:
   - Default
   - TransparentFX

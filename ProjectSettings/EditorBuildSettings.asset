@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Brian.unity
+    guid: 2883ff1df6b6c0a41a89722e405f384b
+  - enabled: 1
+    path: Assets/Scenes/BattleCave.unity
+    guid: 864a7a798636fb64fb724658c250290e
   m_configObjects: {}
