@@ -46,7 +46,7 @@ public class Boss2 : MonoBehaviour
     {
         if (enabled)
         {
-            print("update");
+            // print("update");
             spriteFacingConrtoller();
 
             trackPlayer();
