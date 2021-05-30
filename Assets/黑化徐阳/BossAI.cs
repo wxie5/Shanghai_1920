@@ -80,10 +80,13 @@ public class BossAI : MonoBehaviour
     void attack()
     {
         RaycastHit2D raycastHit2d = Physics2D.BoxCast(boxCollider2d.bounds.center, new Vector2(boxCollider2d.bounds.size.x / 2, boxCollider2d.bounds.size.y / 2), 0f, Vector2.right * facing, attRange / 2, bossLayerMask);
+        // print(raycastHit2d);
         if(raycastHit2d.collider != null)
         {
+            // print(raycastHit2d.collider.gameObject);
             if (raycastHit2d.collider.gameObject==Player &&rayCD==0)
             {
+                // print("damage");
                 //这里调用玩家受伤
                 raycastHit2d.collider.GetComponent<PlayerController>().TakeDamage();
                 rayCD = 0.2f;

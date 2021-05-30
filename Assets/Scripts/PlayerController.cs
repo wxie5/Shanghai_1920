@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour {
     public float maxRollDistance;
     public float attackRange;
     public float rollingSpeed;
+
+    public TextMeshProUGUI damageText;
     
     private Rigidbody2D body;
     private CapsuleCollider2D collider;
@@ -30,11 +33,14 @@ public class PlayerController : MonoBehaviour {
     private Vector2 rollingTarget;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private int damageCount;
 
     public bool TakeDamage() {
         if (status == PlayerStatus.Rolling) return false;
         
         animator.SetTrigger("TakeDamage");
+        ++damageCount;
+        damageText.text = $"Damage: {damageCount}";
         return true;
     }
 
@@ -45,6 +51,8 @@ public class PlayerController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         facingDirection = Direction.Right;
         status = PlayerStatus.Idle;
+        damageCount = 0;
+        damageText.text = "Damage: 0";
     }
 
     private void FixedUpdate() {
