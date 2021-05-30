@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour {
             var direction = facingDirection == Direction.Left ? Vector2.left : Vector2.right;
             var enemy = GetEnemy(direction);
             print(enemy);
+            if(enemy) enemy.GetComponent<Enemy>().TakeDamage();
         }
 
         // var testDamage = Input.GetKeyDown(KeyCode.F);
@@ -108,10 +109,11 @@ public class PlayerController : MonoBehaviour {
         if (other.CompareTag("Pickup")) {
             print("Item pickup");
             Destroy(other.gameObject);
-        } else if (other.CompareTag("Portal")) {
-            var portal = other.GetComponent<Portal>();
-            SceneManager.LoadScene(portal.sceneName);
-        }
+        } 
+        // else if (other.CompareTag("Portal")) {
+        //     var portal = other.GetComponent<Portal>();
+        //     SceneManager.LoadScene(portal.sceneName);
+        // }
     }
 
     private float GetRollDistance(Vector2 direction) {
